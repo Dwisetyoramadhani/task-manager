@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Label\UpdateLabelRequest;
+use App\Http\Requests\Task\StoreTaskRequest;
 use App\Models\Label;
 use App\Services\LabelService;
 use Illuminate\Http\Request;
@@ -25,12 +27,10 @@ class LabelController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreTaskRequest $request)
     {
         try {
-            $data = $request->validate([
-                'name' => 'required|string'
-            ]);
+            $data = $request->validated();
             return response()->json($this->service->create($data));
         } catch (\Throwable $th) {
             return response()->json([
@@ -56,12 +56,10 @@ class LabelController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(UpdateLabelRequest $request, $id)
     {
         try {
-            $data = $request->validate([
-                'name' => 'sometimes|string'
-            ]);
+            $data = $request->validated();
             return response()->json($this->service->update($data, $id));
         } catch (\Throwable $th) {
             return response()->json([

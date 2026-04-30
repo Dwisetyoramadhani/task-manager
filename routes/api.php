@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthControlller;
 use App\Http\Controllers\LabelController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,3 +17,4 @@ Route::post('/auth/logout', [AuthControlller::class, 'logout'])->middleware('aut
 
 
 Route::apiResource('/labels', LabelController::class)->middleware('auth:sanctum');
+Route::apiResource('/task', TaskController::class)->middleware('auth:sanctum');
